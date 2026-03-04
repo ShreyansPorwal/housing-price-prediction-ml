@@ -5,7 +5,7 @@ let avgPrice = DATASET_AVG;
 
 /* ── Input bounds (match training data) ─────────────────────── */
 const BOUNDS = {
-  latitude: [32, 41],  // integer only
+  latitude: [32, 41], 
   housing_median_age: [1, 52],
   median_income: [1.5, 9],
   rooms_per_household: [1, 8],
