@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>California House Price Predictor — ECS 171 Team 3</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ─────────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1>California House Price Predictor</h1>
+        <p class="header-sub">Gradient Boosting Model &nbsp;·&nbsp; ECS 171 Team 3</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── MAIN ───────────────────────────────────────────────── -->
+  <main>
+
+    <!-- LEFT COLUMN: INPUT + PRESETS -->
+    <section class="col-left">
+
+      <!-- Preset scenarios -->
+      <div class="card">
+        <h2>Quick Scenarios</h2>
+        <p class="card-desc">Load a preset to see how different California regions compare.</p>
+        <div id="presets" class="presets-grid">
+          <!-- injected by JS -->
+        </div>
+      </div>
+
+      <!-- Input form -->
+      <div class="card">
+        <h2>Custom Input</h2>
+        <p class="card-desc">Adjust the sliders or type values to build your own prediction.</p>
+        <form id="predict-form">
+
+          <div class="field-row">
+            <label>
+              <span>Latitude <small>(32 – 41)</small></span>
+              <div class="range-pair">
+                <input type="range"  id="s-lat" min="32" max="41" step="1" value="37" />
+                <input type="number" id="n-lat" min="32" max="41" step="1" value="37" name="latitude" required />
+              </div>
+            </label>
+
+            <label>
+              <span>Housing Median Age <small>(1 – 52)</small></span>
+              <div class="range-pair">
+                <input type="range"  id="s-age" min="1" max="52" step="1" value="25" />
+                <input type="number" id="n-age" min="1" max="52" step="1" value="25" name="housing_median_age" required />
+              </div>
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label>
+              <span>Median Income <small>($10k, 1.5 – 9)</small></span>
+              <div class="range-pair">
+                <input type="range"  id="s-inc" min="1.5" max="9" step="0.1" value="4.5" />
+                <input type="number" id="n-inc" min="1.5" max="9" step="0.1" value="4.5" name="median_income" required />
+              </div>
+            </label>
+
+            <label>
+              <span>Rooms per Household <small>(1 – 8)</small></span>
+              <div class="range-pair">
+                <input type="range"  id="s-rph" min="1" max="8" step="0.1" value="5" />
+                <input type="number" id="n-rph" min="1" max="8" step="0.1" value="5"  name="rooms_per_household" required />
+              </div>
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label>
+              <span>Bedrooms per Room <small>(0.05 – 0.35)</small></span>
+              <div class="range-pair">
+                <input type="range"  id="s-bpr" min="0.05" max="0.35" step="0.01" value="0.22" />
+                <input type="number" id="n-bpr" min="0.05" max="0.35" step="0.01" value="0.22" name="bedrooms_per_room" required />
+              </div>
+            </label>
+
+            <label>
+              <span>Ocean Proximity</span>
+              <select name="ocean_proximity" id="sel-ocean">
+                <option value="INLAND">Inland</option>
+                <option value="NEAR BAY" selected>Near Bay</option>
+                <option value="NEAR OCEAN">Near Ocean</option>
+              </select>
+            </label>
+          </div>
+
+          <button type="submit" id="predict-btn">
+            <span id="btn-text">Predict Price</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: RESULT + FEATURE IMPORTANCE -->
+    <section class="col-right">
+
+      <!-- Prediction result -->
+      <div class="card card-result" id="result-card">
+        <h2>Prediction</h2>
+        <div id="result-idle" class="result-idle">
+          Fill in features and click <strong>Predict Price</strong>.
+        </div>
+        <div id="result-live" class="result-live hidden">
+          <div class="price-display">
+            <span class="price-label">Estimated Median House Value</span>
+            <span class="price-value" id="price-out">$—</span>
+          </div>
+          <div class="price-context">
+            <div class="context-chip" id="ctx-vs-avg"></div>
+            <div class="context-chip" id="ctx-ocean"></div>
+            <div class="context-chip" id="ctx-income"></div>
+          </div>
+        </div>
+        <div id="result-error" class="result-error hidden"></div>
+      </div>
+
+      <!-- Feature importance -->
+      <div class="card">
+        <h2>Feature Importance</h2>
+        <p class="card-desc">What the model relies on most (from trained Gradient Boosting).</p>
+        <div id="importance-bars" class="importance-bars">
+          <!-- injected by JS -->
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    ECS 171 — Machine Learning &nbsp;·&nbsp; Team 3 &nbsp;·&nbsp;
+    Tianrun Xu &nbsp;·&nbsp; Rakel Munshi &nbsp;·&nbsp; Nidhi Deshmukh &nbsp;·&nbsp;
+    Zain Muhammad &nbsp;·&nbsp; Shreyans Porwal
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
