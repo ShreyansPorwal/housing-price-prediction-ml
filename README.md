@@ -1,34 +1,92 @@
-# California House Price Predictor
+# Housing Price Prediction (Random Forest)
 
-**ECS 171 Group Project (Winter 2026)** — source code and demo app for the final report submission.
+## Overview
 
-Predicts California median house value from location and housing features using a **Gradient Boosting** model (1990 U.S. Census data). Flask backend + HTML/JS front-end; sliders and presets for the live demo.
+This project builds a machine learning pipeline to predict California housing prices using structured census and geographic data.
 
-**Team 3:** Tianrun Xu, Rakel Munshi, Nidhi Deshmukh, Zain Muhammad, Shreyans Porwal.
-
----
-
-## Run
-
-```bash
-pip install -r requirements.txt
-python app.py
-```
-
-Open **http://localhost:5001** — adjust inputs or pick a preset, click **Predict Price**.
+The focus of this project was on feature engineering, model selection, and improving predictive performance through ensemble methods.
 
 ---
 
-## Layout
+## My Contributions
 
-- **`app.py`** — Trains Gradient Boosting (200 trees, depth 5), serves `/`, `/api/metadata`, `/api/examples`, `/api/predict`.
-- **`frontend/`** — Single page: form, result, feature-importance bars (from model).
-- **`notebooks/`** — EDA, feature selection, model notebooks.
-- **`data/`** — Raw and processed CSVs; EDA figures.
-- **`report/`** — LaTeX source for the final project report (PDF submitted separately).
+* Conducted **exploratory data analysis (EDA)** to understand feature relationships and distributions
+* Designed and implemented a **feature engineering pipeline**, including:
+
+  * `rooms_per_household`
+  * `bedrooms_per_room`
+  * `population_per_household`
+* Performed **feature selection** using correlation analysis and domain insights
+* Built and tuned a **Random Forest regression model**
+* Compared multiple models (Linear Regression, Ridge, Gradient Boosting, Random Forest)
+* Evaluated performance using RMSE, MAE, and R²
+* Contributed to project documentation and GitHub organization
 
 ---
 
-## Model
+## Dataset
 
-8 features (latitude, housing_median_age, median_income, ocean_proximity one-hot, rooms_per_household, bedrooms_per_room). StandardScaler + GradientBoostingRegressor. Test RMSE ≈ $67k, R² ≈ 0.66. Top importance: median_income (~62%), then ocean (e.g. INLAND).
+* California housing dataset
+* Features include:
+
+  * Median income
+  * Housing age
+  * Geographic location
+  * Engineered ratio-based features
+
+---
+
+## Methodology
+
+### 1. Exploratory Data Analysis
+
+* Correlation heatmaps
+* Distribution analysis
+* Identification of key predictors (median income, location)
+
+### 2. Feature Engineering
+
+* Created ratio-based features to improve signal:
+
+  * rooms per household
+  * bedrooms per room
+  * population per household
+
+### 3. Modeling
+
+* Models evaluated:
+
+  * Linear Regression
+  * Ridge Regression
+  * Random Forest
+  * Gradient Boosting
+
+### Final Model:
+
+* **Random Forest**
+* Achieved improved performance through feature selection and tuning
+
+---
+
+## Results
+
+* Improved RMSE compared to baseline models
+* Strong predictive performance with ensemble methods
+* Feature engineering significantly improved model accuracy
+
+---
+
+## Tech Stack
+
+* Python
+* Scikit-learn
+* Pandas, NumPy
+* Matplotlib / Seaborn
+
+---
+
+## Key Insights
+
+* Median income is the strongest predictor of housing prices
+* Engineered ratio features outperform raw features
+* Tree-based models handle non-linearity effectively
